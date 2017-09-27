@@ -1,14 +1,55 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="secondary">
+        <ion-title>
+            Nature Forum
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="bg">
+    <ion-card>
+        <ion-card-content>
+            <ion-card-title>
+                Welcome to the Nature Forum!
+            </ion-card-title>
+            <p>
+                There are {{ posts.length }} posts here.
+            </p>
+        </ion-card-content>
+    </ion-card>
+    <br>
+
+    <ion-card *ngFor="let post of posts" style="margin-bottom: 20px;">
+        <img src="../../assets/images/{{ post.imagePath }}">
+
+        <ion-card-content>
+            <ion-card-title>
+                {{ post.title }}
+            </ion-card-title>
+            <p>{{ post.description }}</p>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col>
+                <button ion-button clear icon-start (click)="clickFav(post)" color="secondary">
+                    <ion-icon [name]="(post.favorite) ? 'ios-heart' : 'ios-heart-outline'"></ion-icon>
+                    Fav
+                </button>
+            </ion-col>
+
+            <ion-col>
+                <button ion-button clear icon-start (click)="clickShare(post)" color="secondary">
+                    <ion-icon [name]="(post.share) ? 'ios-share' : 'ios-share-outline'"></ion-icon>
+                    Share
+                </button>
+            </ion-col>
+
+            <ion-col>
+                <button ion-button clear icon-start (click)="clickDelete(post)" color="secondary">
+                    <ion-icon name="ios-close"></ion-icon>
+                    Del
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
 </ion-content>
